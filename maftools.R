@@ -36,28 +36,6 @@ gisticChromPlot(gistic = brca.gistic,
 gisticOncoPlot(gistic = brca.gistic,
                clinicalData = brca_clin,
                top = 10)
-help("gisticOncoPlot")
-
-help("matrix")
-cnv.brca <- brca.gistic@gene.summary #data frame of CNV's per gene
-mut.brca <- brca.maf@variant.type.summary #data frame of muts per sample
-
-
-cnv.sample.gene <- matrix(data = brca.gistic@data[["Variant_Classification"]], 
-                          ncol = length(brca.gistic@data[["Hugo_Symbol"]]),
-                          nrow = length(brca.gistic@data[["Tumor_Sample_Barcode"]]),
-                          dimnames = (list(brca.gistic@data[["Tumor_sample_Barcode"]],
-                                           brca.gistic@data[["Hugo_Symbol"]])))
-
-cnv.sample.gene[1:20]
-gc()
-
-View(brca.gistic@data)
-
-help("compare")
-comparision <- compare(brca.gistic@gene.summary[["Hugo_Symbol"]],brca.maf@gene.summary[["Hugo_Symbol"]])
-genes <- comparision$tM
-class(genes)
 
 #list of all genes
 genes <- plyr::rbind.fill.matrix(brca.gistic@gene.summary[["Hugo_Symbol"]],brca.maf@gene.summary[["Hugo_Symbol"]])
