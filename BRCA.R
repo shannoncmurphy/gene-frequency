@@ -76,3 +76,16 @@ alt.genes <- brca.gistic@gene.summary
 genes$amp <- alt.genes$Amp[match(genes$Hugo_Symbol,alt.genes$Hugo_Symbol)]
 genes$del <- alt.genes$Del[match(genes$Hugo_Symbol,alt.genes$Hugo_Symbol)]
 genes$total_alt <- alt.genes$AlteredSamples[match(genes$Hugo_Symbol,alt.genes$Hugo_Symbol)]
+
+total_alt_samples <- 1080
+total_mut_samples <- 985
+
+#find frequency of mutations and alterations
+genes$alt_freq <- (genes$total_alt/total_alt_samples)*100
+genes$mut_freq <- (genes$total_mut/total_mut_samples)*100
+
+#total frequency
+genes$total <- (genes$alt_freq + genes$mut_freq)
+
+#find gene with highest frequency
+genes[which.max(genes$total),]
