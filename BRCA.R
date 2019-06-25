@@ -1,7 +1,5 @@
 library(maftools)
 library(TCGAbiolinks)
-install.packages("compare")
-library(compare)
 library(tibble)
 
 BRCAmut.maf <- GDCquery_Maf(tumor = "BRCA", pipelines = "mutect2")
@@ -16,7 +14,6 @@ brca_clin$time[is.na(brca_clin$days_to_death)] <- brca_clin$days_to_last_follow_
 
 brca.maf <- read.maf(maf = BRCAmut.maf, clinicalData = brca_clin, isTCGA = T)
 
-help("getGeneSummary")
 brca_summary <- getGeneSummary(brca.maf)
 
 all.lesions <- system.file("extdata","all_lesions.conf_99.txt", package = "maftools")
